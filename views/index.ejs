@@ -78,7 +78,7 @@
 
                         <div class="item" id="room-<%=pasif.gameId%>">
                                 <section>
-                                    <h5><%=pasif.roomName%></h5>
+                                    <h5><%=pasif.roomName%> (<%=pasif.usersCount%> kişi içerde)</h5>
                                     <hr class="line"></hr>
                                     <p><font color="skyblue">Oda açıklaması:</font><%=pasif.roomExplain%></p>
                                     <span>
@@ -95,7 +95,8 @@
                 <% } %>
       
       
-      
+           
+  
      
   
     
@@ -103,6 +104,33 @@
            
       
      
+    </div>
+
+    <div class="list">
+        
+
+        <% if(locals.aktifler && locals.aktifler.length > 0) { %>
+              
+            <% locals.aktifler.forEach(aktif => { %>
+
+
+                <div class="item" id="room-<%=aktif.gameId%>" style="background-color:red;">
+                        <section>
+                            <h5><%=aktif.roomName%> (oda dolu!)</h5>
+                            <hr class="line"></hr>
+                            <p><font color="skyblue">Oda açıklaması:</font><%=aktif.roomExplain%></p>
+                            <span>
+                              <font color="skyblue">Tema:</font><%=aktif.theme%>  
+                            </span>
+                        </section>
+                  
+                </div>
+
+            <% })%>
+
+
+        <% } %>
+
     </div>
     
   <div>

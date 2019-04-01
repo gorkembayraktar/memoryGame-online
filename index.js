@@ -107,7 +107,7 @@ io.sockets.on("connection", function(socket){
    //console.log("Aktif OYUNLAR",games);
    //console.log(`Bağlanan id : ${socket.id} , room : ${roomid}`);
    
-   
+   console.log(gamesState());
 
    socket.on("nName", function(name){
 
@@ -479,6 +479,6 @@ function shuffle(array) {
   }
 
   var gamesState = () => Object.assign({},games,{
-      aktifler:games.filter(game => game.usersCount >= 2),
+      aktifler:games.filter(game => game.start),
       pasifler:games.filter(game=> game.usersCount < 2),
   })
