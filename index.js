@@ -187,7 +187,7 @@ io.sockets.on("connection", function(socket){
                order:~~(Math.random() * 2),
                card:shuffle(imgUrls).concat(shuffle(imgUrls)),
                opens:[],
-               target:1,
+               target:5,
                TIMER : {
                     interval : null,
                     sec : 10,
