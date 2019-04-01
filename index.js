@@ -288,6 +288,12 @@ io.sockets.on("connection", function(socket){
                                             
                                             if(cards[users[socket.id].roomid].TIMER.sec == 0){
 
+                                                if(cards[users[socket.id].roomid].users[card.order].req == 1){
+                                                    cards[users[socket.id].roomid].users[card.order].req = 0;
+                                                    io.sockets.in(users[socket.id].roomid)
+                                                    .emit('node ng cardsonuc',{state:false,ids:[opens[opens.length-1].id]});
+                                                    
+                                                }
                                                
                                                 orderChange();
                                                 cards[users[socket.id].roomid].TIMER.sec = cards[users[socket.id].roomid].TIMER.max;
