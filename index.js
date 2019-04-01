@@ -187,7 +187,7 @@ io.sockets.on("connection", function(socket){
                order:~~(Math.random() * 2),
                card:shuffle(imgUrls).concat(shuffle(imgUrls)),
                opens:[],
-               target:5,
+               target:1,
                TIMER : {
                     interval : null,
                     sec : 10,
@@ -333,6 +333,17 @@ io.sockets.on("connection", function(socket){
 
 
     });
+    
+    socket.on('node ng rovans',(req)=>{
+        io.sockets.in(users[socket.id].roomid).emit('node ng rovans',req);
+    })
+
+    socket.on('node ng rovans ok',(req)=>{
+        io.sockets.in(users[socket.id].roomid).emit('node ng rovans ok',req);
+    })
+
+
+   socket.join("ANASAYFA"); // TÜM ODALAR GÜNCELLENMELİ
    socket.on('create Server', (data) => {
         var rand = randomAccess(6);
         games.push({
@@ -345,8 +356,12 @@ io.sockets.on("connection", function(socket){
             theme:"THE FLASH"
         });
 
-        console.log(games);
+        io.sockets.in(users[socket.id].roomid).emit('node ng redirect',rand);
+
+        io.sockets.in("ANASAYFA").emit('game append',games[games.length-1]);
+
         socket.emit('create get',rand);
+      
    });
    
    socket.on('disconnect',()=>{

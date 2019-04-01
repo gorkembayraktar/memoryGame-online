@@ -170,10 +170,27 @@
 
         socket.on('create get',(data)=>{
             setTimeout(function(){
-                window.location = `https:hafz.herokuapp.com/${data}`;
+                window.location = `https://hafz.herokuapp.com/${data}`;
             },500);
             
         });
+
+        socket.on('game append',(data)=>{
+            
+            var as = ` <div class="item" id="room-${data.gameId}">
+                                <section>
+                                    <h5>${data.roomName}</h5>
+                                    <hr class="line"></hr>
+                                    <p><font color="skyblue">Oda açıklaması:</font>${data.roomExplain}</p>
+                                    <span>
+                                      <font color="skyblue">Tema:</font>${data.theme}  
+                                    </span>
+                                    <button class="button btn-block btn-join" data-id="${data.gameId}" onclick="joinRoom(this)">Katıl</button>
+                                </section>
+                          
+                        </div>`;
+            document.querySelector('.list').innerHTML += as;
+        })
 
 
 

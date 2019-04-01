@@ -77,19 +77,22 @@ body{
   width:200px;
   background-color:black;
   color:white;
-  padding:4px 7px;
+  padding:12px 16px;
 }
 .container .list .item .line{
  color:red;
   border:1px solid white;
   margin:2px 0;
 }
+.container .list .item h5{
+  font-size:1.16em;
+}
 .container .list .item p{
-  font-size:12px;
-  margin:4px 0;
+  font-size:14px;
+  margin:8px 0;
 }
 .container .list .item span{
-  font-size:12px;
+  font-size:14px;
   margin-bottom:6px;
   display:block;
 }
