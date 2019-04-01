@@ -35,6 +35,16 @@ body{
   
   
 }
+
+@media only screen and (max-width: 600px) {
+  .container{
+    width:100%;
+  }
+  .box{
+    width:15% !important;
+  }
+
+}
 .top{
   display:flex;
   align-self:flex-start;
@@ -51,17 +61,23 @@ body{
   
 }
 .top .user .name{
-  background-color:#1d1d14;
+  background-color:#000210;
   height:100%;
   line-height:80px;
   padding-left:10px;
   box-sizing:border-box;
 }
+.top .user .scor:nth-child(1){
+  border-right:1px dashed white;
+}
+.top .user .scor:nth-child(2){
+  border-left:1px dashed white;
+}
 .top .user .scor{
   line-height:80px;
   text-align:center;
   font-size:25px;
-  background-color:#424141;
+  background-color:#000000;
   height:100%;
 }
 .top > div{
@@ -140,7 +156,7 @@ body{
 .box{
   width:100px;
   height:100px;
-  background-color:black;
+  background-color:#000210;
   margin:4px 6px;
   background-repeat:no-repeat;
   background-size:cover;
