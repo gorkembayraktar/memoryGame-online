@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hafz from portfoy</title>
+    <link rel="stylesheet" href="public/css/customIndex.css">
+   
+</head>
+<body>
+    
+       
+
+      <!--
+    <% if( locals.error && error.message != undefined) { %>
+        <span class="alert alert-danger">
+            <%=error.message %>
+        </span>
+    <% } %>
+
+
+
+    <button id="create">
+        new room 
+    </button>
+    <table>
+        <thead>
+            <th>ID</th>
+            <TH>date</TH>
+            <th>state</th>
+        </thead>
+        <tbody>
+            <% if(locals.data) {%>
+            <% locals.data.forEach(d => { %>
+              
+                <tr class='<%= d.start ? "danger" : "success" %>'>
+                    
+                    <td><%=d.gameId%></td>
+                    <td><%=d.gameCreate%></td>
+                   
+
+                        
+                    <td>
+                        <% if(!d.start){ %>
+                            <a href="<%=d.gameId%>">Waiting</a>
+                        <% }else{ %>
+                            
+                            full
+
+                            <%}%>
+                        
+                        </td>
+                    
+                </tr>
+              
+                <% }); %>
+            <% }%>
+        </tbody>
+    </table>
+-->
+
+
+<div class="container">
+    <div class="title">
+      <div class="left">AKTİF OYUN LİSTESİ</div>
+      <div class="right">
+        <button class="button btn-create" id="create">Yeni oyun!</button>
+      </div>
+    </div>
+    
+    <div class="list">
+
+            <% if(locals.pasifler && locals.pasifler.length > 0) { %>
+                  
+                    <% locals.pasifler.forEach(pasif => { %>
+
+
+                        <div class="item" id="room-<%=pasif.gameId%>">
+                                <section>
+                                    <h5><%=pasif.roomName%></h5>
+                                    <hr class="line"></hr>
+                                    <p><font color="skyblue">Oda açıklaması:</font><%=pasif.roomExplain%></p>
+                                    <span>
+                                      <font color="skyblue">Tema:</font><%=pasif.theme%>  
+                                    </span>
+                                    <button class="button btn-block btn-join" data-id="<%=pasif.gameId%>" onclick="joinRoom(this)">Katıl</button>
+                                </section>
+                          
+                        </div>
+
+                    <% })%>
+        
+        
+                <% } %>
+      
+      
+      
+     
+  
+    
+  
+           
+      
+     
+    </div>
+    
+  <div>
+    
+    <div id="settings" onclick="setting()"></div>
+
+    <script src="/public/js/sweetalert2.all.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+
+        var defaultSet = {
+            isNoname : {
+                progressSteps:["1","2"],
+                content:[
+                    'Kullanıcı adınız',
+                    'Oda açıklaması'
+                ]
+            },
+            isName:{
+                progressSteps:["1"],
+                content:[
+                    'Oda açıklaması'
+                ]
+            }
+        }
+
+        var socket = io();
+
+        var create = document.querySelector('#create');
+        create["onclick"] = evt;
+    
+        function evt(){
+
+            var myname = localStorage.getItem('myname');
+           
+
+            Swal.mixin({
+                    input: 'text',
+                    confirmButtonText: 'Next &rarr;',
+                    showCancelButton: true,
+                    inputValidator: (value) => {
+                        if (!value) {
+                        return 'Birşeyler yazmayı dene'
+                        }
+                    },
+                    progressSteps: defaultSet[(myname ? "isName" : "isNoname")].progressSteps
+                    }).queue(defaultSet[(myname ? "isName" : "isNoname")].content).then((result) => {
+                    if (result.value) {
+                        
+
+                        if(myname){
+                            socket.emit('create Server',{name:myname,explain:result.value[0].substring(0,50)});
+                        }else{
+                            localStorage.setItem('myname',result.value[0]);
+                            socket.emit('create Server',{name:result.value[0],explain:result.value[1].substring(0,50)});
+                        }
+                        
+                    }
+            })  
+
+
+
+           // 
+        }
+
+        socket.on('create get',(data)=>{
+            setTimeout(function(){
+                window.location = `https:hafz.herokuapp.com/${data}`;
+            },500);
+            
+        });
+
+
+
+       async function setting(){
+            name = localStorage.getItem('myname') || "";
+            name = await nickName(name,true);
+            if(name){
+              localStorage.setItem('myname',name);
+            }
+       }
+
+
+        async function nickName(val = null,state = false){
+          const {value: name} = await Swal.fire({
+              title: 'Takma adınızı giriniz!',
+              input: 'text',
+              inputValue: val,
+              allowOutsideClick: state,
+              inputPlaceholder: 'Enter your username',
+              inputAttributes: {
+                maxlength: 30,
+                autocapitalize: 'off',
+                autocorrect: 'off'
+              }
+            })
+       
+
+           return (name == "" ? nickName():name);
+          }
+        
+
+          function joinRoom(e){
+              
+              var roomid = e.dataset.id;
+              location.href = "/"+roomid;
+          }
+    </script>
+
+
+    
+</body>
+</html>

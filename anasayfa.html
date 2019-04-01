@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hafz from portfoy</title>
+    <link rel="stylesheet" href="/public/css/sweetalert2.min.css">
+    <style>
+    
+    @import url('https://fonts.googleapis.com/css?family=Germania+One');
+
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  width:100%;
+  height:100vh;
+  background-color:#112F41;
+  display:flex;
+  justify-content:flex-start;
+  align-items:center;
+  flex-direction:column;
+  flex-wrap:wrap;
+  transition:background-color 1s;
+  font-family: 'Germania One', cursive;
+}
+.container{
+  width:600px;
+  display:flex;
+  align-self:center;
+  flex-direction:row;
+  flex-wrap:wrap;
+  justify-content:center;
+
+  
+  
+  
+}
+.top{
+  display:flex;
+  align-self:flex-start;
+  width:100%;
+  height:100px;
+  justify-content:space-around;
+  align-items:center;
+  color:white;
+}
+.top .user{
+  display:flex;
+  flex-direction:column;
+  flex-wrap:wrap;
+  
+}
+.top .user .name{
+  background-color:#1d1d14;
+  height:100%;
+  line-height:80px;
+  padding-left:10px;
+  box-sizing:border-box;
+}
+.top .user .scor{
+  line-height:80px;
+  text-align:center;
+  font-size:25px;
+  background-color:#424141;
+  height:100%;
+}
+.top > div{
+  width:100%;
+  margin:5px;
+  box-sizing: border-box;
+  height:80%;
+  background-color:black;
+}
+.top > .time{
+  color:white;
+  margin:5%;
+  width:50%;
+  box-sizing:border-box;
+  align-centent:center;
+  height:50px;
+  text-align:center;
+  line-height:50px;
+  font-size:115%;
+  position:relative;
+  padding:5px 9px;
+}
+.top > .time::before{
+  content:'';
+  z-index:-1;
+  box-shadow:0 0px 10px red;
+  width:10%;
+  height:50px;
+  position:absolute;
+  animation: time 2.5s ease infinite;
+  animation-direction:alternate-reverse;
+
+}
+@keyframes time{
+  to{
+    left:calc(100% - 10%);
+  }
+  from{
+    left:0;
+  }
+}
+.description{
+  color:gray;
+  text-shadow:.1px .2px #fff;
+  align-self:stretch;
+  position:relative;
+  height: auto;
+}
+
+.description .chat{
+  max-height:130px;
+  overflow-y:scroll;
+}
+.description dl{
+    height:100%;
+}
+.description .chat dl dt{
+  text-align:left;
+  padding:5px;
+}
+.description .chat dl dd{
+  text-align:right;
+  border-radius:12px;
+  padding:4px;
+}
+.description input{
+  margin:14px;
+  padding:12px;
+  border:none;
+  position:absolute;
+  display:block;
+  width:calc(100% - 28px);
+  box-sizing:border-box;
+}
+
+.box{
+  width:100px;
+  height:100px;
+  background-color:black;
+  margin:4px 6px;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position: 50%;
+
+}
+.box:hover{
+  background-color:#2d6700;
+  cursor:pointer;
+}
+    
+.orderActive{
+  border: 4px solid white;
+    box-shadow: 0px 0px 65px #f4ffe1bf;
+}
+
+#block{
+  width:100%;
+  height:100vh;
+  position:fixed;
+  left:0px;
+  top:0px;
+  z-index:999;
+  background-color:rgba(0,0,0,.2);
+  display:none;
+}
+
+#settings{
+  top:50%;
+  left:0;
+  transform:translateY(-50%);
+  position:fixed;
+  width:50px;
+  height:50px;
+  padding:25px;
+  cursor:pointer;
+  background-size: cover;
+  background-color:#ffffd7;
+  border-radius: 0 50% 50% / 25% 15% 3%;
+  background-repeat: no-repeat;
+  background-position: 100% 100%;
+  background-image: url("http://cdn.onlinewebfonts.com/svg/img_152954.png");
+  z-index:99999999;
+
+}
+
+#chmod{
+  left:0;
+  bottom:0;
+  position:fixed;
+  width:300px;
+  height:300px;
+  background-color:#fff;
+  padding-left:20px;
+  padding-top:10px;
+  margin-bottom:5px;
+  z-index:99999;
+  border-top:3px solid gray;
+  border-right:3px solid gray;
+  box-sizing: border-box;
+  font-family:Arial;
+  
+}
+.ch-title{
+  width:100%;
+  height:30px;
+  text-align:center;
+  cursor:pointer;
+}
+.ch-messages{
+height: 200px;
+overflow-y:auto;
+}
+.ch-messages .message{
+
+  padding : 3px 6px;
+ 
+  display: block;
+    width: 100%;
+    position: relative;
+    float:left;
+     word-break: break-all;
+     
+}
+
+.ben{
+  float:right;
+  background-color: #248f9a;
+  color:white;
+  padding: 8px 9px;
+ border-radius: 6px 12px;
+    max-width: 70%;
+}
+.o{
+  float: left;
+  padding: 8px 9px;
+  color:white;
+  background-color: #b35415;
+      max-width: 70%;
+}
+.sistem{
+  color:white;
+  background-color:red;
+  padding: 8px 16px;
+  float: left;
+
+}
+.ch-input{
+  bottom:0px;
+  height:60px;
+ position: absolute;
+ width:100%;
+ left:0;
+  
+  
+}
+.ch-input input{
+  width:100%;
+  padding:10px;
+  height: 100%;
+}
+
+
+    </style>
+   
+
+    
+</head>
+<body>
+    
+    <div id="seninsiran" style="display:none;position:fixed;margin: 20px auto;width:120px;padding:8px 16px;bottom:50px;text-align:center;background-color:red;color:white;z-index:999;">
+        SENİN SIRAN
+    </div>
+
+    
+
+    <div class="top">
+        <div class="user"> 
+            <div class="name">..</div>
+            <div class="scor">.</div>
+        </div>
+        <div class="time"> Bekleniyor ..</div>
+        <div class="user">
+          <div class="scor">.</div>
+          <div class="name">..</div>
+        </div>
+      </div>
+      <div class="description" style="display:none;">
+        <div class="chat">
+           <dl id="data">
+              <dt>Server :Coffee</dt>
+              <dd>Client :Black hot drink</dd>
+           </dl>
+        </div>
+         <input type="text" name="chat" placeholder="Enter" id="message">
+      </div>
+      <div class="container">
+        <div class="box" data-id="1"></div>
+        <div class="box" data-id="2"></div> 
+        <div class="box" data-id="3"></div> 
+        <div class="box" data-id="4"></div> 
+        <div class="box" data-id="5"></div>  
+
+        <div class="box" data-id="6"></div> 
+         <div class="box" data-id="7"></div>
+        <div class="box" data-id="8"></div> 
+        <div class="box" data-id="9"></div> 
+        <div class="box" data-id="10"></div> 
+
+        <div class="box" data-id="11"></div>  
+        <div class="box" data-id="12"></div> 
+        <div class="box" data-id="13"></div>
+        <div class="box" data-id="14"></div> 
+        <div class="box" data-id="15"></div> 
+
+        <div class="box" data-id="16"></div> 
+        <div class="box" data-id="17"></div>
+        <div class="box" data-id="18"></div> 
+        <div class="box" data-id="19"></div> 
+        <div class="box" data-id="20"></div> 
+        
+        
+      </div>
+       
+      <div id="block"></div>
+
+      <div id="settings" onclick="rename();"></div>
+
+      <div id="chmod">
+         <div class="ch-title">Rakip adı</div>
+         <hr>
+         <div class="ch-messages">
+              
+             
+         </div>
+
+         <hr>
+         <hr>
+         <div class="ch-input">
+           <input type="text" id="chat-input" placeholder="Birşeyler.." />
+
+         </div>
+      </div>
+
+    <script src="/public/js/sweetalert2.all.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      
+        var userleft = {
+          state : false,
+          name : ""
+        };
+        var socket;
+        var roomid;
+       // var connectBtn = document.getElementById('connect');
+        
+        var localName = localStorage.getItem('myname');
+
+        var message = document.querySelector('#chat-input');
+        message.addEventListener('keypress',function(e){
+           if(e.keyCode == 13 && message.value != ""){
+                send(message.value);
+                message.value = "";     
+           }
+        })
+        
+            
+       /* if(localName && (window.location.pathname.slice(1) != localStorage.getItem("room") ) )
+            socketStart(localName);
+        else{
+          eventConnect();
+        }*/
+        
+        
+
+        if(localName){
+          socketStart(localName);
+        }else{
+          eventConnect();
+        }
+
+        
+          
+ 
+        
+         
+        async function eventConnect(){
+          var nickname = await nickName();
+          localStorage.setItem('myname',nickname);
+
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+          });
+
+          Toast.fire({
+            type: 'success',
+            title: 'Hoşgeldin '+nickname
+          })
+
+          socketStart(nickname);
+           /* let name = document.querySelector('input[name=name]').value;
+            if(!name || name.value == "")
+                return;
+            
+            
+            localStorage.setItem('myname',name);
+            setVisible("none");
+            socketStart(name);
+             */ // 2324 31032019  
+            
+            /* if(!socket)
+                    socket = io();
+                
+                socket.on("connect", function(){
+                    var nName = name.value;
+                    socket.emit('nName',nName);
+                });
+
+                socket.on("node news",function(data){
+                    dataWrite(data);
+                });
+
+                socket.on("node new user",function(data){
+                    dataWrite(data);
+                })
+               */
+
+                
+            
+        }
+        
+       /* if(!socket)
+            socket = io();
+                
+                socket.on("connect", function(){
+                    var nName = name.value;
+                    socket.emit('nName',nName);
+                });
+
+                socket.on("node news",function(data){
+                    dataWrite(data);
+                });
+                
+                socket.on("node ng",function(data){
+                    var interval = 1000;
+                    var sec = 10;
+                    var div_interval = document.querySelector('#interval');
+                    var gameInterval = setInterval(() => {
+                        if(sec >= 0){
+                            div_interval.innerHTML = sec--;
+                            if(sec == 0){
+                                clearInterval(gameInterval);
+                                gameActive();
+                            }
+                        }
+
+
+                    }, interval);
+                });
+
+                socket.on("node new user",function(data){
+                    dataWrite(data);
+                    setTimeout(function(){
+                        socket.emit('node new game',"open");
+                    },1000);
+                    
+                })
+                socket.on("node disconnect",function(data){
+                    dataWrite(data);
+                });
+                */
+        
+        function socketStart(name){
+                if(!socket)
+                    socket = io();
+                
+                
+
+
+                socket.on("connect", function(){
+                    
+                    var nName = name;
+                    socket.emit('nName',{name:nName,roomid:window.location.pathname.slice(1)});
+                });
+                
+              
+                socket.on("node news",function(data){
+                    dataWrite(data);
+                });
+                socket.on("node my",(data)=>{
+                  localStorage.setItem("nodeid",data.id);
+                  localStorage.setItem("room",data.room);
+                })
+                socket.on("node ng",function(data){
+
+                  
+
+                    var interval = 1000;
+                    var sec = 1;
+                    var div_interval = document.querySelector('.time');
+                    var gameInterval = setInterval(() => {
+                       /* if(userleft.status){
+                          alert(`${userleft.name} odadan ayrıldı`);
+                          clearInterval(gameInterval);
+                          return;
+                        }*/
+
+                        if(sec >= 0){
+                            div_interval.innerHTML = sec--;
+                            if(sec == 0){
+                                clearInterval(gameInterval);
+                                
+                                gameActiveSocket();
+                            }
+                        }
+
+
+                    }, interval);
+                });
+              
+                socket.on("node new user",function(data){
+
+                  const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 5000
+                  });
+
+                  Toast.fire({
+                    type: 'success',
+                    title: "<font color='#f00'>"+data.name+'</font> --- geldi;artık başlayabiliriz :)'
+                  })
+                  
+                    userleft.status = false;
+                    console.log(data);
+                    dataWrite({system:true,user:data,message:data.name + " sohbete katıldı."});
+                    setTimeout(function(){
+                        socket.emit('node new game',data);
+                    },1000);
+                    
+                })
+                socket.on("node disconnect",function(data){
+                    userleft = {
+                      name : data.name,
+                      status:true
+                    }
+                    Swal.fire({
+                      title: '<font color="#f00">'+data.name+' </font> ! odadan ayrıldı.</font>',
+                      animation: false,
+                      customClass: {
+                        popup: 'animated tada'
+                      }
+                    })
+                    dataWrite({user:data,system:true,message:data.name + " odadan ayrıldı"});
+                });
+        }
+
+
+        function dataWrite(val){
+           
+            var data =  document.querySelector('.ch-messages');
+            data.innerHTML += `<div class="message">
+                                  <span class="${(val.system ? "sistem" : val.id && val.id == localStorage.getItem('nodeid') ? "ben" : "o")}">
+                                      ${val.message}
+                                  </span>
+                              </div>`;
+            data.scrollTop = data.scrollHeight;
+            console.log(val);
+            
+          
+        }
+
+        function setVisible(display){
+            document.querySelector('#set').style.display = display;
+        }
+
+        function send(text){
+            socket.emit('node new message',text);
+        }
+        var controlTek = false;
+        function gameActiveSocket(){
+            socket.emit("node ng started");
+            socket.on("node ng on",(data)=>{
+               
+               if(!controlTek){
+                cardActive();
+                controlTek = true;
+                renderClientNames(data.users);
+                if(data.active.id && data.active.id == localStorage.getItem("nodeid")){
+                  seninsiran(true);
+                }
+                
+                
+              }
+           })
+        }
+
+        function renderClientNames(names){
+        
+            var domUser = document.querySelectorAll('.user'); 
+            if(domUser && names){
+
+            names.forEach((name,i) => {
+                if(name.id == localStorage.getItem("nodeid")){
+                  domUser[i].classList.add("orderActive");
+                }else{
+                  document.querySelector('.ch-title').textContent = name.name;
+                }
+                domUser[i].querySelector('.name').textContent = name.name;
+                domUser[i].querySelector('.scor').textContent = name.scor;
+
+                domUser[i].querySelector('.name').id = "name-"+name.id;
+                domUser[i].querySelector('.scor').id = "scor-"+name.id;
+             });
+            }else{
+              console.log("user bulunamadı");
+            }
+           
+        }
+
+        var temporary;
+        var request = 0;
+        var lastsend = -1;
+        function cardActive(){
+          let box = document.querySelectorAll('.box');
+
+          box.forEach(b => {
+            b.addEventListener('click',function(e){
+               if(e.target.dataset.id != lastsend){
+                  socket.emit('node ng card',e.target.dataset.id);
+                  lastsend = e.target.dataset.id;
+               }
+            });
+          });
+          
+          socket.on('node ng card',(response)=>{
+            console.log(response);
+
+              if(response.error){
+               
+              }else{
+                let target = document.querySelectorAll('.box')[response.cardId-1];
+                temporary = target;
+                target.style.backgroundImage = `url("${response.card.img}")`;
+                target.style["pointer-events"] = "none";
+              }
+            });
+
+          socket.on('node ng cardsonuc',(res)=>{
+            if(res.state == false){
+             
+                if(res.ids){
+                  res.ids.forEach(id =>{
+                    document.querySelectorAll('.box')[parseInt(id)-1].style.backgroundImage = "";
+                    document.querySelectorAll('.box')[parseInt(id)-1].style["pointer-events"] = "auto";
+                  })
+                }
+            }else{
+
+              document.querySelector(`#scor-${res.won.id}`).textContent = res.won.scor;
+              document.querySelector(`#name-${res.won.id}`).textContent = res.won.name;
+
+
+            }
+
+
+          });
+          socket.on('node ng siradegis',(res)=>{
+               seninsiran(res == localStorage.getItem("nodeid"));
+           
+          });
+
+          socket.on('node ng timer',(res)=>{
+              setTime(res);
+          });
+          
+       
+          socket.on('node ng cardwon',(won)=>{
+              if(won.data.id == localStorage.getItem("nodeid")){}
+              else{}
+
+              Swal.fire({
+                    title: '<font color="green">'+won.data.name+'</font>	&nbsp;kazandı!Tebrikler :)',
+                    width: 600,
+                    padding: '3em',
+                    background: '#fff url(https://sweetalert2.github.io/images/trees.png)',
+                    backdrop: `
+                      rgba(0,0,123,0.4)
+                      url("https://i.gifer.com/VZvx.gif")
+                      center top
+                      no-repeat
+                    
+                    `
+                  })
+          });
+
+          socket.on('node ng rename',(rename)=>{
+            document.querySelector(`#name-${rename.id}`).textContent = rename.name;
+          })
+
+        }
+
+        function seninsiran(state){
+          document.body.style.backgroundColor = (state ? "#215600" : "#287177");
+        
+          
+          document.getElementById("seninsiran").style.display = ( state ? "block" : "none");
+
+          if(state){
+            setTimeout(function(){
+              document.getElementById("block").style.display = "none";
+            },1000);
+          }else{
+            document.getElementById("block").style.display = "block";
+          }
+          
+        }
+
+        var timer;
+        /*function timer(){
+            var totalSecond = 15;
+            
+               timer = setInterval(function(){
+
+                  setTime(totalSecond--);
+                  if(totalSecond == 0){
+                    clearInterval(timer);
+                  }
+
+               },1000);
+              
+        }*/
+
+        function setTime(time){
+          document.querySelector('.time').textContent = time;
+        }
+
+
+        async function nickName(val = null,state = false){
+          const {value: name} = await Swal.fire({
+              title: 'Takma adınızı giriniz!',
+              input: 'text',
+              inputValue: val,
+              allowOutsideClick: state,
+              inputPlaceholder: 'Enter your username',
+              inputAttributes: {
+                maxlength: 30,
+                autocapitalize: 'off',
+                autocorrect: 'off'
+              }
+            })
+       
+
+           return (name == "" ? nickName():name);
+          }
+        
+        async function rename(){
+          var name = await nickName(localStorage.getItem('myname'),true);
+          var id = localStorage.getItem('nodeid');
+          if(name){
+            localStorage.setItem('myname',name);
+            socket.emit('node ng rename',{id:id,name:name});
+          }
+        }
+
+        document.querySelector('.ch-title')["onclick"] = chTitleEvent; 
+        
+        var chatToggle = true;
+        function chTitleEvent(e){
+            if(chatToggle){
+                  var children = e.target.parentNode.children;
+                  e.target.parentNode.style.height = "auto";
+                  for(var i = 1; i < children.length;i++){
+                    children[i].style.display = "none";
+                  }
+            }else{
+              var children = e.target.parentNode.children;
+                  e.target.parentNode.style.height = "300px";
+                  for(var i = 1; i < children.length;i++){
+                    children[i].style.display = "block";
+                  }
+            }
+            chatToggle = !chatToggle;
+        }
+          
+    </script>
+</body>
+</html>

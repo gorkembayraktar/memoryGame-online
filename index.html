@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <div id="interval"></div>
+
+    <div id="set">
+        <label>name:</label>
+        <input type="text" name="name">
+        <button id="connect">Connect</button>
+    </div>
+
+    <div>
+        <ul id="data">
+
+        </ul>
+
+        <input type="text" name="message">
+        <button id="send">DATA</button>
+    </div>
+
+
+    
+</head>
+<body>
+    
+
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket;
+        var roomid;
+        var connectBtn = document.getElementById('connect');
+        
+        var localName = localStorage.getItem('myname');
+
+        
+            
+        if(localName){
+            socketStart(localName);
+            setVisible("none");
+        }else{
+            connectBtn["onclick"] = eventConnect;
+        }   
+           
+        
+         
+        function eventConnect(){
+            let name = document.querySelector('input[name=name]').value;
+            if(!name || name.value == "")
+                return;
+            
+            
+            localStorage.setItem('myname',name);
+            setVisible("none");
+            socketStart(name);
+               /* if(!socket)
+                    socket = io();
+                
+                socket.on("connect", function(){
+                    var nName = name.value;
+                    socket.emit('nName',nName);
+                });
+
+                socket.on("node news",function(data){
+                    dataWrite(data);
+                });
+
+                socket.on("node new user",function(data){
+                    dataWrite(data);
+                })
+               */
+
+                
+            
+        }
+        
+       /* if(!socket)
+            socket = io();
+                
+                socket.on("connect", function(){
+                    var nName = name.value;
+                    socket.emit('nName',nName);
+                });
+
+                socket.on("node news",function(data){
+                    dataWrite(data);
+                });
+                
+                socket.on("node ng",function(data){
+                    var interval = 1000;
+                    var sec = 10;
+                    var div_interval = document.querySelector('#interval');
+                    var gameInterval = setInterval(() => {
+                        if(sec >= 0){
+                            div_interval.innerHTML = sec--;
+                            if(sec == 0){
+                                clearInterval(gameInterval);
+                                gameActive();
+                            }
+                        }
+
+
+                    }, interval);
+                });
+
+                socket.on("node new user",function(data){
+                    dataWrite(data);
+                    setTimeout(function(){
+                        socket.emit('node new game',"open");
+                    },1000);
+                    
+                })
+                socket.on("node disconnect",function(data){
+                    dataWrite(data);
+                });
+                */
+        
+        function socketStart(name){
+                if(!socket)
+                    socket = io();
+                
+                socket.on("connect", function(){
+                    var nName = name;
+                    socket.emit('nName',{name:nName,roomid:window.location.pathname.slice(1)});
+                });
+
+                socket.on("node news",function(data){
+                    dataWrite(data);
+                });
+                
+                socket.on("node ng",function(data){
+                    var interval = 1000;
+                    var sec = 10;
+                    var div_interval = document.querySelector('#interval');
+                    var gameInterval = setInterval(() => {
+                        if(sec >= 0){
+                            div_interval.innerHTML = sec--;
+                            if(sec == 0){
+                                clearInterval(gameInterval);
+                                gameActiveSocket();
+                            }
+                        }
+
+
+                    }, interval);
+                });
+              
+                socket.on("node new user",function(data){
+                    console.log(data);
+                    dataWrite(data);
+                    setTimeout(function(){
+                        socket.emit('node new game',"open");
+                    },1000);
+                    
+                })
+                socket.on("node disconnect",function(data){
+                    dataWrite(data);
+                });
+        }
+
+
+        function dataWrite(data){
+            document.querySelector('#data').innerHTML += "<li>"+data+"</li>";
+        }
+
+        function setVisible(display){
+            document.querySelector('#set').style.display = display;
+        }
+
+        var sendBtn = document.getElementById('send');
+        sendBtn["onclick"] = send;
+
+
+        function send(){
+            let text = document.querySelector('input[name=message]');
+            socket.emit('node new message',text.value);
+            
+        }
+
+        function gameActiveSocket(){
+            socket.emit("node ng started");
+            socket.on("node ng on",(data)=>{
+                alert("dinleniyor");
+            })
+
+            
+        }
+
+        
+        
+        
+    </script>
+</body>
+</html>
