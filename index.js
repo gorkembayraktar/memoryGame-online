@@ -355,8 +355,8 @@ io.sockets.on("connection", function(socket){
             roomName:data.name,
             theme:"THE FLASH"
         });
-
-        io.sockets.in(users[socket.id].roomid).emit('node ng redirect',rand);
+        if(users[socket.id])
+            io.sockets.in(users[socket.id].roomid).emit('node ng redirect',rand);
 
         io.sockets.in("ANASAYFA").emit('game append',games[games.length-1]);
 
