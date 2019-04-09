@@ -36,7 +36,7 @@ var games = [
         usersCount:0,
         roomExplain:"Sistem tarafından otomatik oluşturulan bir oda!",
         roomName:"System",
-        theme:"THE FLASH"
+        theme:"T-F"
     },{
         gameId : "SYSTEMTEST2",
         gameCreate : Date.now(),
@@ -44,7 +44,7 @@ var games = [
         usersCount:0,
         roomExplain:"Sistem tarafından otomatik oluşturulan bir oda!",
         roomName:"System",
-        theme:"THE FLASH"
+        theme:"T-F"
     },{
         gameId : "SYSTEMTEST3",
         gameCreate : Date.now(),
@@ -52,7 +52,7 @@ var games = [
         usersCount:0,
         roomExplain:"Sistem tarafından otomatik oluşturulan bir oda!",
         roomName:"System",
-        theme:"THE FLASH"
+        theme:"T-F"
     }
 ];
 
@@ -107,7 +107,7 @@ io.sockets.on("connection", function(socket){
    //console.log("Aktif OYUNLAR",games);
    //console.log(`Bağlanan id : ${socket.id} , room : ${roomid}`);
    
-   console.log(gamesState());
+   
 
    socket.on("nName", function(name){
 
@@ -173,6 +173,11 @@ io.sockets.on("connection", function(socket){
                 }
             )
         }else{
+           var shuff = shuffle(imgUrls);
+           var shuff2 = shuffle([...shuff]);
+           
+           
+           
            cards[users[socket.id].roomid] = {
                users:[
                    {
@@ -185,7 +190,7 @@ io.sockets.on("connection", function(socket){
                 ],
                 
                order:~~(Math.random() * 2),
-               card:shuffle(imgUrls).concat(shuffle(imgUrls)),
+               card:shuff.concat(shuff2),
                opens:[],
                target:5,
                TIMER : {
@@ -207,6 +212,7 @@ io.sockets.on("connection", function(socket){
            
         }
           
+        
 
     });
    
@@ -226,7 +232,7 @@ io.sockets.on("connection", function(socket){
         var card = cards[users[socket.id].roomid];
         if(card){
           
-            sonuc = card && socket.id == card.users[card.order].id && card.isContinue; // is
+            sonuc = card && socket.id && socket.id == card.users[card.order].id && card.isContinue; // is
             
             if(sonuc){
 
@@ -359,7 +365,7 @@ io.sockets.on("connection", function(socket){
             usersCount:0,
             roomExplain:data.explain,
             roomName:data.name,
-            theme:"THE FLASH"
+            theme:"T-F"
         });
         if(users[socket.id])
             io.sockets.in(users[socket.id].roomid).emit('node ng redirect',rand);
@@ -487,4 +493,5 @@ function shuffle(array) {
   var gamesState = () => Object.assign({},games,{
       aktifler:games.filter(game => game.start),
       pasifler:games.filter(game=> game.usersCount < 2),
+      all:games
   })

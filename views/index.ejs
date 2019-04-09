@@ -63,14 +63,61 @@
 
 <div class="container">
     <div class="title">
-      <div class="left">AKTİF OYUN LİSTESİ</div>
+      <div class="left"><H3>Oda listesi</H3></div>
       <div class="right">
         <button class="button btn-create" id="create">Yeni oyun!</button>
       </div>
     </div>
     
+
+
+
     <div class="list">
 
+        <table>
+            <thead>
+                <th>Oda açıklaması</th>
+                <th>Kurucu</th>
+                <th style="text-align:center;">Pl</th>
+                <th>Tema</th>
+                <th style="text-align:center;">Durum</th>
+            </thead>    
+            <tbody>
+
+
+                    <% if(locals.all && locals.all.length > 0) { %>
+                  
+                        <% locals.all.forEach(all => { %>
+    
+                            <tr>
+                                    <td><%=all.roomExplain%></td>
+                                    <td><%=all.roomName%> </td>
+                                    <td><%=all.usersCount%>/2</td>
+                                    <td><%=all.theme%> </td>
+                                    <td>
+                                        
+                                        <button 
+                                        class="button btn-block <%=(all.usersCount >= 2 ? 'btn-full':'btn-join')%>" 
+                                        data-id="<%=all.gameId%>" 
+                                        onclick="joinRoom(this)"
+                                        <% if(all.usersCount >= 2) { %>disabled <%}%>
+
+                                        ><%=(all.usersCount >= 2 ? "dolu":  "Katıl")%></button>
+                                    </td>
+        
+                            <tr>
+    
+                        <% })%>
+            
+            
+                    <% } %>
+
+                
+            </tbody>
+        </table>
+
+
+<!--
             <% if(locals.pasifler && locals.pasifler.length > 0) { %>
                   
                     <% locals.pasifler.forEach(pasif => { %>
@@ -94,7 +141,7 @@
         
                 <% } %>
       
-      
+      -->
            
   
      
@@ -105,7 +152,7 @@
       
      
     </div>
-
+    <!--
     <div class="list">
         
 
@@ -132,6 +179,7 @@
         <% } %>
 
     </div>
+    -->
     
   <div>
     
@@ -205,7 +253,7 @@
 
         socket.on('game append',(data)=>{
             
-            var as = ` <div class="item" id="room-${data.gameId}">
+           /* var as = ` <div class="item" id="room-${data.gameId}">
                                 <section>
                                     <h5>${data.roomName}</h5>
                                     <hr class="line"></hr>
@@ -216,8 +264,27 @@
                                     <button class="button btn-block btn-join" data-id="${data.gameId}" onclick="joinRoom(this)">Katıl</button>
                                 </section>
                           
-                        </div>`;
-            document.querySelector('.list').innerHTML += as;
+                        </div>`;*/
+
+            var as = `<tr>
+                                    <td>${data.roomExplain}</td>
+                                    <td>${data.roomName}</td>
+                                    <td>${data.usersCount}/2</td>
+                                    <td>${data.theme} </td>
+                                    <td>
+                                        
+                                        <button 
+                                        class="button btn-block ${data.usersCount >= 2 ? 'btn-full':'btn-join'}" 
+                                        data-id="${data.gameId}" 
+                                        onclick="joinRoom(this)"
+                                        ${data.usersCount >= 2 ? 'disabled':null}
+                                        >
+                                        ${data.usersCount >= 2 ? "dolu":  "Katıl"}
+                                        </button>
+                                    </td>
+        
+                            <tr>`;
+            document.querySelector('tbody').innerHTML += as;
         })
 
 
