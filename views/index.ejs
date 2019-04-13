@@ -246,8 +246,9 @@
 
         socket.on('create get',(data)=>{
             setTimeout(function(){
-                window.location = `https://hafz.herokuapp.com/${data}`;
-            },500);
+               /* window.location = `https://hafz.herokuapp.com/${data}`;*/
+                window.location = location.href + data;
+            },200);
             
         });
 
