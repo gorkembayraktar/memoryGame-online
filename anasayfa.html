@@ -43,6 +43,10 @@ body{
   .box{
     width:15% !important;
   }
+  .icons a{
+    width:30px;
+    height:30px;
+  }
 
 }
 .top{
@@ -198,7 +202,7 @@ body{
   border-radius: 0 50% 50% / 25% 15% 3%;
   background-repeat: no-repeat;
   background-position: 100% 100%;
-  background-image: url("http://cdn.onlinewebfonts.com/svg/img_152954.png");
+  background-image: url("https://cdn3.iconfinder.com/data/icons/complete-set-icons/512/skype2512x512.png");
   z-index:99999999;
 
 }
@@ -216,9 +220,27 @@ body{
   border-radius: 0 50% 50% / 25% 15% 3%;
   background-repeat: no-repeat;
   background-position: 100% 100%;
-  background-image: url("https://png.pngtree.com/element_pic/00/16/07/165789983f987e3.jpg");
+  background-image: url("https://cdn3.iconfinder.com/data/icons/complete-set-icons/512/home512x512.png");
   z-index:99999999;
  
+}
+#invite{
+  top:50%;
+  left:0;
+  transform: translateY(-200px);
+  position:fixed;
+  width:50px;
+  height:50px;
+  padding:25px;
+  cursor:pointer;
+  background-size: cover;
+  background-color:#ffffd7;
+  border-radius: 0 50% 50% / 25% 15% 3%;
+  background-repeat: no-repeat;
+  background-position: 100% 100%;
+  background-image: url("https://cdn4.iconfinder.com/data/icons/red-social-media-icons-1/32/RS_Social_Media_Icons-Share-512.png");
+  z-index:99999999;
+
 }
 
 #chmod{
@@ -256,7 +278,7 @@ overflow-y:auto;
     width: 100%;
     position: relative;
     float:left;
-     word-break: break-all;
+     word-break: break-word;
      
 }
 
@@ -264,23 +286,20 @@ overflow-y:auto;
   float:right;
   background-color: #248f9a;
   color:white;
-  padding: 8px 9px;
+  padding: 2px 3px;
  border-radius: 6px 12px;
     max-width: 70%;
 }
 .o{
   float: left;
-  padding: 8px 9px;
-  color:white;
-  background-color: #b35415;
+  padding: 2px 3px;
+  color:#043e1c;
       max-width: 70%;
 }
 .sistem{
-  color:white;
-  background-color:red;
-  padding: 8px 16px;
+  color:black;
+  padding: 2px 4px;
   float: left;
-
 }
 .ch-input{
   bottom:0px;
@@ -290,6 +309,14 @@ overflow-y:auto;
  left:0;
   
   
+}
+.chatClose{
+  position:absolute;
+  right:10px;
+  top:0px;
+  color:red;
+  font-size:2em;
+  box-sizing:border-box;
 }
 .ch-input input{
   width:100%;
@@ -309,14 +336,78 @@ overflow-y:auto;
 background-color:red !important;
 color:white;
 }
-
-    </style>
+.share{
+  position:fixed;
+  background: linear-gradient(to left,#070c0e,#112f41,#0e1215);
+  border:3px solid white;
+  border-radius:50px;
+  width:60%;
+  height:250px;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+}
+.share > .icons{
+  width:100%;
+  height:100%;
+  left:0;top:0;
+  display:flex;
+  justify-content: space-around;
+  flex-direction: row;
+  align-items: center;
+}
+.share > .title{
+  text-align:center;
+  color:white;
+  font-size:2em;
+  height:100px;
+  position:absolute;
+  width:100%;
+  z-index:0;
+}
+.share .shareCancel{
+  position:absolute;
+  width:100%;
+  bottom:0;
+  left:0;
+  height:70px;
+  display:flex;
+  justify-content:center;
+  align-items: center;
+  
+}
+.share .shareCancel > button{
+  padding: 16px 32px;
+    background-color: #8a1313;
+    color: white;
+    font-weight: bold;
+}
+.share > .icons > a { z-index:1;}
+</style>
    
 
     
 </head>
 <body>
-    
+    <div id="share" class="share">
+     
+      <h3 class="title">Arkadaşını davet et!</h3>
+      
+      <div class="icons">
+       
+       <a  target="_blank" href="whatsapp://send?text=" onclick="this.setAttribute('href',this.getAttribute('href')+window.location.href)"><img  src="https://www.searchpng.com/wp-content/uploads/2018/12/Whatsapp.png" height="100" width="100"></a>
+       <a  target="_blank" href="#"><img  src="http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c526.png" height="100" width="100"></a>
+       <a  target="_blank" href="#"><img  src=" https://is1-ssl.mzstatic.com/image/thumb/Purple114/v4/e0/99/7f/e0997fab-6eed-7492-6e21-0ddfcbcbf135/AppIcon-1x_U007emarketing-85-220-0-6.png/246x0w.jpg" height="100" width="100"></a>
+       <a  target="_blank" href="http://www.facebook.com/share.php?u=" onclick="this.setAttribute('href',this.getAttribute('href')+encodeURI(location.href))"><img  src="https://cdn4.iconfinder.com/data/icons/social-media-icons-the-circle-set/48/facebook_circle-512.png" height="100" width="100"></a>
+       <a  target="_blank" href=" https://twitter.com/intent/tweet?via=hafzherokuapp&text=Hafıza oyununa katıl :"  onclick="this.setAttribute('href',this.getAttribute('href')+window.location.href)"><img  src="http://aux2.iconspalace.com/uploads/twitter-circle-icon-256.png" height="100" width="100"></a>
+      
+      </div>
+      <div class="shareCancel">
+          <button onclick="invite()">İPTAL</button>
+      </div>
+      
+    </div>  
+
     <div id="seninsiran" style="display:none;position:fixed;margin: 20px auto;width:120px;padding:8px 16px;bottom:50px;text-align:center;background-color:red;color:white;z-index:999;">
         SENİN SIRAN
     </div>
@@ -377,8 +468,16 @@ color:white;
 
       <div id="settings" onclick="rename();"></div>
 
+      <div id="invite" onclick="invite();"></div>
+
+
+
       <div id="chmod">
-         <div class="ch-title">Rakip adı</div>
+         <div class="ch-title">
+           <b>Rakip bekleniyor..</b>
+           <span class="chatClose">×</span>
+
+         </div>
          <hr>
          <div class="ch-messages">
               
@@ -388,7 +487,7 @@ color:white;
          <hr>
          <hr>
          <div class="ch-input">
-           <input type="text" id="chat-input" placeholder="Birşeyler.." />
+           <input type="text" id="chat-input" placeholder="Hızlı göndermek için 'Enter'" />
 
          </div>
       </div>
@@ -396,6 +495,25 @@ color:white;
     <script src="/public/js/sweetalert2.all.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script>
+
+
+      let SHARE_STATE = true;
+      const SHARE  = document.getElementById('share');
+      function shareToggle(state = 'all'){
+         if(state == "hide"){
+          SHARE.style.display = "none";
+          SHARE_STATE = false;
+         }else{
+          SHARE.style.display = SHARE_STATE ? 'none' : 'block';
+          SHARE_STATE = !SHARE_STATE;
+         }
+        
+      }
+      function invite(){
+        shareToggle();
+      }
+
+
       
         var userleft = {
           state : false,
@@ -409,7 +527,7 @@ color:white;
 
         var message = document.querySelector('#chat-input');
         message.addEventListener('keypress',function(e){
-           if(e.keyCode == 13 && message.value != ""){
+           if(socket && e.keyCode == 13 && message.value != ""){
                 send(message.value);
                 message.value = "";     
            }
@@ -587,8 +705,13 @@ color:white;
                   })
                   
                     userleft.status = false;
-                    console.log(data);
-                    dataWrite({system:true,user:data,message:data.name + " sohbete katıldı."});
+                  
+                    dataWrite({
+                      system:true,
+                      user:data,
+                      message:`${data.name} sohbete katıldı.`
+                    });
+
                     setTimeout(function(){
                         socket.emit('node new game',data);
                     },1000);
@@ -606,17 +729,21 @@ color:white;
                         popup: 'animated tada'
                       }
                     })
-                    dataWrite({user:data,system:true,message:data.name + " odadan ayrıldı"});
+                    dataWrite({
+                      user:data,
+                      system:true,
+                      message:`${data.name} odadan ayrıldı`
+                    });
                 });
         }
 
         
         function dataWrite(val){
-           
+            var localid = localStorage.getItem('nodeid');
             var data =  document.querySelector('.ch-messages');
             data.innerHTML += `<div class="message">
-                                  <span class="${(val.system ? "sistem" : val.id && val.id == localStorage.getItem('nodeid') ? "ben" : "o")}">
-                                      ${val.message}
+                                  <span class="${(val.system ? "sistem" : val.id && val.id == localid ? "ben" : "o")}">
+                                    <font color="${val.system  ? '#f00' :'#0f0'}">${val.system ? 'SYSTEM::' : (val.id != localid ) ? val.user.name + ':' : ''}</font>${val.message}
                                   </span>
                               </div>`;
             data.scrollTop = data.scrollHeight;
@@ -641,6 +768,7 @@ color:white;
                 cardActive();
                 controlTek = true;
                 renderClientNames(data.users);
+                shareToggle("hide");
                 if(data.active.id && data.active.id == localStorage.getItem("nodeid")){
                   seninsiran(true);
                 }
@@ -659,7 +787,7 @@ color:white;
                 if(name.id == localStorage.getItem("nodeid")){
                   domUser[i].classList.add("orderActive");
                 }else{
-                  document.querySelector('.ch-title').textContent = name.name;
+                  document.querySelector('.ch-title').querySelector('b').textContent = name.name;
                 }
                 domUser[i].querySelector('.name').textContent = name.name;
                 domUser[i].querySelector('.scor').textContent = name.scor;
@@ -893,19 +1021,22 @@ color:white;
           }
         }
 
-        document.querySelector('.ch-title')["onclick"] = chTitleEvent; 
+        document.querySelector('.chatClose')["onclick"] = chTitleEvent; 
         
         var chatToggle = true;
         function chTitleEvent(e){
+
+          var element = e.target.parentNode.parentNode;
+          var children = element.children;
             if(chatToggle){
-                  var children = e.target.parentNode.children;
-                  e.target.parentNode.style.height = "auto";
+                  
+                  element.style.height = "auto";
                   for(var i = 1; i < children.length;i++){
                     children[i].style.display = "none";
                   }
             }else{
-              var children = e.target.parentNode.children;
-                  e.target.parentNode.style.height = "300px";
+            
+                  element.style.height = "300px";
                   for(var i = 1; i < children.length;i++){
                     children[i].style.display = "block";
                   }
